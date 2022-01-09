@@ -56,9 +56,10 @@ app.put('/api/persons/:id', (req, res) => {
 app.post('/api/persons', (request, response, next) => {
 
     const body = request.body
-    if (body.content === undefined) {
-        return response.status(400).json({ error: 'content missing' })
+    if (body.name === undefined) {
+        return response.status(400).json({ error: 'name missing' })
     }
+
 
     const person = new Phone({
         name: body.name,
@@ -68,10 +69,7 @@ app.post('/api/persons', (request, response, next) => {
 
     person.save()
         .then(savedPerson => {
-            return savedPerson.toJSON()
-        })
-        .then(savedAndFormattedPerson => {
-            response.json(savedAndFormattedPerson)
+            response.json(savedPerson)
         })
         .catch(error => next(error))
 
