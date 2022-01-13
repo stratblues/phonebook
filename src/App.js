@@ -69,7 +69,7 @@ const App = () => {
             setPersons(persons.map(person => person.id !== personId ? person : returnedPerson))
             setNewName('')
             setNewNumber('')
-          }) 
+          })
           .catch(error => {
             setErrorMessage(`${changedNumber.name} was already removed from the server!`)
             setTimeout(() => {
@@ -97,6 +97,13 @@ const App = () => {
 
           }, 5000)
 
+        })
+        .catch(error => {
+          console.log(error)
+          setErrorMessage(error.data)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
         })
 
 
